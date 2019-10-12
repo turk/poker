@@ -1,0 +1,21 @@
+{% extends "base.twig" %}
+{% block main %}
+<div class="login-page">
+    {% if successMessage %}
+        <ul class="successMessage" style="display: block;">
+            <li>{{ successMessage }}</li>
+        </ul>
+    {% endif %}
+
+    <div class="form">
+        How many hands player 1 wins: {{ winCount['player1'] }}
+        <br>
+        How many hands player 2  wins: {{ winCount['player2'] }}
+
+        <a href="/"> GO HOME</a>
+
+    </div>
+    </div>
+{% endblock %}
+
+

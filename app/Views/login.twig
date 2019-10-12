@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+{% block main %}
+<div class="login-page">
+    {% if errorMessage %}
+        <ul class="errorMessages" style="display: block;">
+            <li>{{ errorMessage }}</li>
+        </ul>
+    {% endif %}
+
+    <div class="form">
+        <form method="POST" action="/login" class="login-form">
+            <input name="username" type="text" placeholder="username" required/>
+            <input name="password" type="password" placeholder="password" required/>
+            <button type="submit">login</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+

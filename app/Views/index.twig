@@ -1,0 +1,22 @@
+{% extends "base.twig" %}
+{% block main %}
+    <div class="login-page">
+        {% if successMessage %}
+            <ul class="successMessage" style="display: block;">
+                <li>{{ successMessage }}</li>
+            </ul>
+        {% endif %}
+
+        <div class="form">
+            <form method="POST" action="/upload" enctype="multipart/form-data" class="login-form">
+                <input type="file" name="file" id="file" required>
+
+                <button type="submit">UPLOAD</button>
+            </form>
+            <ul class="menu">
+                <li><a href="/play">let's play</a></li>
+                <li><a href="/logout">LOGOUT</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

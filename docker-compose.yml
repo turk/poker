@@ -1,0 +1,57 @@
+version: '3'
+services:
+    poker_webserver:
+        image: nginx:1.17-alpine
+        container_name: poker_webserver
+        volumes:
+            - ".:/var/www"
+            - "./docker/etc/nginx/default.conf:/etc/nginx/conf.d/default.conf"
+            - "./docker/etc/ssl:/etc/ssl"
+        ports:
+            - "8000:80"
+            - "8001:443"
+        restart: always
+        depends_on:
+            - poker_php
+            - poker_mysql
+    poker_php:
+        build:
+            context: ./docker/etc/php
+            dockerfile: Dockerfile
+        container_name: poker_php
+        restart: always
+        volumes:
+            - "./docker/etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
+            - ".:/var/www"
+    poker_composer:
+        image: "composer"
+        container_name: poker_composer
+        volumes:
+            - ".:/app"
+        command: install
+    poker_phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: poker_phpmyadmin
+        ports:
+            - "8090:80"
+        environment:
+            - PMA_ARBITRARY=1
+            - PMA_HOST=poker_mysql
+        restart: always
+        depends_on:
+            - poker_mysql
+    poker_mysql:
+        image: mysql:8.0
+        container_name: poker_mysql
+        restart: always
+        environment:
+            - MYSQL_DATABASE=poker
+            - MYSQL_ROOT_PASSWORD=poker
+            - MYSQL_USER=poker
+            - MYSQL_PASSWORD=poker
+        command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci','--default-authentication-plugin=mysql_native_password']
+        ports:
+            - "8989:3306"
+        volumes:
+            - "./docker/data/db/mysql:/var/lib/mysql"
+            - "./docker/etc/mysql:/etc/mysql/conf.d"
