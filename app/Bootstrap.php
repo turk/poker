@@ -34,7 +34,7 @@ class Bootstrap
     {
         $this->capsule->addConnection([
             'driver' => 'mysql',
-            'host' => '192.168.0.8  ',
+            'host' => 'poker_mysql',
             'port' => '8989',
             'database' => 'poker',
             'username' => 'poker',
