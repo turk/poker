@@ -1,20 +1,19 @@
 {% extends "base.twig" %}
 {% block main %}
-<div class="login-page">
-    {% if successMessage %}
-        <ul class="successMessage" style="display: block;">
-            <li>{{ successMessage }}</li>
-        </ul>
-    {% endif %}
+    {% include 'menu.twig' %}
 
-    <div class="form">
-        How many hands player 1 wins: {{ winCount['player1'] }}
-        <br>
-        How many hands player 2  wins: {{ winCount['player2'] }}
+    <div class="login-page">
+        {% if successMessage %}
+            <ul class="successMessage" style="display: block;">
+                <li>{{ successMessage }}</li>
+            </ul>
+        {% endif %}
 
-        <a href="/"> GO HOME</a>
-
-    </div>
+        <div class="form">
+            How many hands player 1 wins: {{ winCount['player1'] }}
+            <br>
+            How many hands player 2 wins: {{ winCount['player2'] }}
+        </div>
     </div>
 {% endblock %}
 

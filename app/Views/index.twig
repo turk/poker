@@ -1,6 +1,7 @@
 {% extends "base.twig" %}
 {% block main %}
-    <div class="login-page">
+    {% include 'menu.twig' %}
+        <div class="login-page">
         {% if successMessage %}
             <ul class="successMessage" style="display: block;">
                 <li>{{ successMessage }}</li>
@@ -15,7 +16,6 @@
             </form>
             <ul class="menu">
                 <li><a href="/play">let's play</a></li>
-                <li><a href="/logout">LOGOUT</a></li>
             </ul>
         </div>
     </div>
