@@ -16,12 +16,14 @@ class UploadController extends Controller
             }
 
             $lines = [];
-            $fn = fopen($_FILES['file']['tmp_name'], 'rb');
-            while (!feof($fn)) {
-                $result = fgets($fn);
-                $lines[] = ['cards' => trim($result)];
+            $file = file($_FILES['file']['tmp_name'], FILE_SKIP_EMPTY_LINES);
+            foreach ($file as $line_num => $line) {
+                $line = trim(preg_replace('/(^[\r\n]*|[\r\n]+)[\s\t]*[\r\n]+/', '', $line));
+                if($line !== ''){
+                    $lines[] = ['cards' => trim($line)];
+
+                }
             }
-            fclose($fn);
 
             $insert = Game::insert($lines);
             return View::render('index', ['successMessage' => 'The file is uploaded']);
